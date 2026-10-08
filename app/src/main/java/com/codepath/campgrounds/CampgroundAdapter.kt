@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 
+import android.content.Intent
+
 
 private const val TAG = "CampgroundAdapter"
 
@@ -65,11 +67,16 @@ class CampgroundAdapter(
 
 
         override fun onClick(v: View?) {
-            // TODO: Get selected campground
+            // Get selected campground
+            val position = bindingAdapterPosition
+            if (position == RecyclerView.NO_POSITION) return
 
+            val campground = campgrounds[position]
 
-            // TODO: Navigate to Details screen and pass selected campground
-
+            // Navigate to Details screen
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(CAMPGROUND_EXTRA, campground)
+            context.startActivity(intent)
         }
     }
 }
